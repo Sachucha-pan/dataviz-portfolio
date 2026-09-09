@@ -8,7 +8,7 @@ title: "Демографічні характеристики людей, які
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Відкритість до нового досвіду (Oscore) та рівень вживання LSD",
-  "width": 700,
+  "width": 600,
   "height": 400,
   "data": {
   "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
