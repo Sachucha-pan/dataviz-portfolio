@@ -11,7 +11,7 @@ title: "Демографічні характеристики людей."
   "width": 700,
   "height": 400,
   "data": {
-  "url": "https://github.com/Sachucha-pan/dataviz-portfolio/blob/main/specs/Drug_Consumption.csv"
+  "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/blob/main/specs/Drug_Consumption.csv"
   },
   "layer": [
     {
