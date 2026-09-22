@@ -8,7 +8,7 @@ title: Рейтинг популярності психоактивних реч
 
   "title": "Популярність психоактивних речовин за статтю",
 
-  "width": 700,
+  "width": 600,
 
   "data": {
     "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
