@@ -98,35 +98,4 @@
   }
 ]
 
-  "encoding": {
-    "y": {
-      "field": "Drug",
-      "type": "nominal",
-      "sort": "-x",
-      "title": "Речовина"
-    },
-
-    "x": {
-      "aggregate": "mean",
-      "field": "User",
-      "type": "quantitative",
-      "title": "Частка користувачів",
-      "axis": {
-        "format": ".0%"
-      }
-    },
-
-    "tooltip": [
-      {
-        "field": "Drug",
-        "title": "Речовина"
-      },
-      {
-        "aggregate": "mean",
-        "field": "User",
-        "format": ".1%",
-        "title": "Частка користувачів"
-      }
-    ]
-  }
-}
+ 
