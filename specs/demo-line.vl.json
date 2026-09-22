@@ -1,68 +1,81 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Другий демонстраційний графік шаблону. Дані вигадані.",
-  "title": {
-    "text": "Заголовок другого графіка",
-    "anchor": "start",
-    "fontSize": 15
-  },
-  "height": 180,
+
+  "title": "Популярність психоактивних речовин серед жінок",
+
+  "width": 700,
+
   "data": {
-    "values": [
-      {
-        "місяць": "Січ",
-        "значення": 18
-      },
-      {
-        "місяць": "Лют",
-        "значення": 24
-      },
-      {
-        "місяць": "Бер",
-        "значення": 21
-      },
-      {
-        "місяць": "Кві",
-        "значення": 33
-      },
-      {
-        "місяць": "Тра",
-        "значення": 39
-      },
-      {
-        "місяць": "Чер",
-        "значення": 36
-      }
-    ]
+    "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
   },
+
+  "transform": [
+    {
+      "filter": "datum.Gender == 'F'"
+    },
+    {
+      "fold": [
+        "Alcohol",
+        "Amphet",
+        "Amyl",
+        "Benzos",
+        "Caff",
+        "Cannabis",
+        "Choc",
+        "Coke",
+        "Crack",
+        "Ecstasy",
+        "Heroin",
+        "Ketamine",
+        "Legalh",
+        "LSD",
+        "Meth",
+        "Mushrooms",
+        "Nicotine",
+        "VSA"
+      ],
+      "as": ["Drug", "Usage"]
+    },
+    {
+      "calculate": "datum.Usage == 'CL0' ? 0 : 1",
+      "as": "User"
+    }
+  ],
+
   "mark": {
-    "type": "line",
-    "color": "#003964",
-    "point": true
+    "type": "bar",
+    "cornerRadiusEnd": 5,
+    "color": "#DC2626"
   },
+
   "encoding": {
-    "x": {
-      "field": "місяць",
+    "y": {
+      "field": "Drug",
       "type": "nominal",
-      "title": null,
-      "sort": null,
+      "sort": "-x",
+      "title": "Речовина"
+    },
+
+    "x": {
+      "aggregate": "mean",
+      "field": "User",
+      "type": "quantitative",
+      "title": "Частка користувачів",
       "axis": {
-        "labelAngle": 0
+        "format": ".0%"
       }
     },
-    "y": {
-      "field": "значення",
-      "type": "quantitative",
-      "title": null
-    },
+
     "tooltip": [
       {
-        "field": "місяць",
-        "title": "місяць"
+        "field": "Drug",
+        "title": "Речовина"
       },
       {
-        "field": "значення",
-        "title": "значення"
+        "aggregate": "mean",
+        "field": "User",
+        "format": ".1%",
+        "title": "Частка користувачів"
       }
     ]
   }
