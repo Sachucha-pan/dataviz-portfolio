@@ -3,7 +3,7 @@
 
   "title": "Популярність психоактивних речовин серед жінок",
 
-  "width": 300,
+  "width": 250,
 
   "data": {
     "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
