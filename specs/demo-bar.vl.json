@@ -1,60 +1,81 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Демонстраційний графік шаблону. Дані вигадані. Замініть його своїм.",
-  "title": {
-    "text": "Заголовок графіка",
-    "anchor": "start",
-    "fontSize": 15
-  },
-  "height": 180,
+
+  "title": "Популярність психоактивних речовин серед чоловіків",
+
+  "width": 700,
+
   "data": {
-    "values": [
-      {
-        "категорія": "Категорія А",
-        "значення": 42
-      },
-      {
-        "категорія": "Категорія Б",
-        "значення": 31
-      },
-      {
-        "категорія": "Категорія В",
-        "значення": 27
-      },
-      {
-        "категорія": "Категорія Г",
-        "значення": 18
-      }
-    ]
+    "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
   },
+
+  "transform": [
+    {
+      "filter": "datum.Gender == 'M'"
+    },
+    {
+      "fold": [
+        "Alcohol",
+        "Amphet",
+        "Amyl",
+        "Benzos",
+        "Caff",
+        "Cannabis",
+        "Choc",
+        "Coke",
+        "Crack",
+        "Ecstasy",
+        "Heroin",
+        "Ketamine",
+        "Legalh",
+        "LSD",
+        "Meth",
+        "Mushrooms",
+        "Nicotine",
+        "VSA"
+      ],
+      "as": ["Drug", "Usage"]
+    },
+    {
+      "calculate": "datum.Usage == 'CL0' ? 0 : 1",
+      "as": "User"
+    }
+  ],
+
   "mark": {
     "type": "bar",
-    "color": "#003964"
+    "cornerRadiusEnd": 5,
+    "color": "#2563EB"
   },
+
   "encoding": {
     "y": {
-      "field": "категорія",
+      "field": "Drug",
       "type": "nominal",
-      "title": null,
-      "sort": "-x"
+      "sort": "-x",
+      "title": "Речовина"
     },
+
     "x": {
-      "field": "значення",
+      "aggregate": "mean",
+      "field": "User",
       "type": "quantitative",
-      "title": null,
+      "title": "Частка користувачів",
       "axis": {
-        "tickCount": 5,
-        "format": "d"
+        "format": ".0%"
       }
     },
+
     "tooltip": [
       {
-        "field": "категорія",
-        "title": "категорія"
+        "field": "Drug",
+        "title": "Речовина"
       },
       {
-        "field": "значення",
-        "title": "значення"
+        "aggregate": "mean",
+        "field": "User",
+        "format": ".1%",
+        "title": "Частка користувачів"
       }
     ]
   }
