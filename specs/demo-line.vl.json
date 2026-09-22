@@ -47,7 +47,7 @@
     "mark": {
       "type": "bar",
       "cornerRadiusEnd": 5,
-      "color": "#2563EB"
+      "color": "#DC2626"
     },
     "encoding": {
       "y": {
@@ -75,7 +75,7 @@
       "dx": 5,
       "fontSize": 11,
       "fontWeight": "bold",
-      "color": "#1E3A8A"
+      "color": "#991B1B"
     },
     "encoding": {
       "y": {
