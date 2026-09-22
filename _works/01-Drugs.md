@@ -145,7 +145,7 @@ title: "Рейтинг популярності психоактивних ре�
 
   "title": "Рейтинг популярності психоактивних речовин серед респондентів",
 
-  "width": 700,
+  "width": 600,
 
   "data": {
     "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
