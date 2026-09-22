@@ -6,9 +6,9 @@ title: Рейтинг популярності психоактивних реч
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "title": "Рейтинг популярності психоактивних речовин серед респондентів",
+  "title": "Популярність психоактивних речовин за статтю",
 
-  "width": 600,
+  "width": 700,
 
   "data": {
     "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
@@ -38,16 +38,14 @@ title: Рейтинг популярності психоактивних реч
       ],
       "as": ["Drug", "Usage"]
     },
+
     {
       "calculate": "datum.Usage == 'CL0' ? 0 : 1",
       "as": "User"
     }
   ],
 
-  "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 5
-  },
+  "mark": "bar",
 
   "encoding": {
     "y": {
@@ -68,14 +66,38 @@ title: Рейтинг популярності психоактивних реч
     },
 
     "color": {
-      "aggregate": "mean",
-      "field": "User",
-      "type": "quantitative",
+      "field": "Gender",
+      "type": "nominal",
       "scale": {
-        "scheme": "blues"
+        "domain": ["M", "F"],
+        "range": ["#2563EB", "#DC2626"]
       },
-      "legend": null
-    }
+      "legend": {
+        "title": "Стать",
+        "labelExpr": "datum.label == 'M' ? 'Чоловіки' : 'Жінки'"
+      }
+    },
+
+    "yOffset": {
+      "field": "Gender"
+    },
+
+    "tooltip": [
+      {
+        "field": "Drug",
+        "title": "Речовина"
+      },
+      {
+        "field": "Gender",
+        "title": "Стать"
+      },
+      {
+        "aggregate": "mean",
+        "field": "User",
+        "format": ".1%",
+        "title": "Частка користувачів"
+      }
+    ]
   }
 }
 
