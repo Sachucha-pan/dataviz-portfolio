@@ -45,4 +45,4 @@ example: true
 **Графік із Tableau Public.** Нижче стоїть приклад Tableau,
 не моя робота. Замініть адресу своєю.
 
-![Приклад Tableau Public](https://public.tableau.com/views/RegionalSampleWorkbook/Storms "650")
+![Приклад Tableau Public](https://public.tableau.com/app/profile/oleksandra.p1060/viz/10_08_2026HW/Sheet2)
