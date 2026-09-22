@@ -1,14 +1,14 @@
 ---
 title: Рейтинг популярності психоактивних речовин серед респондентів.
 ---
-"Які психоактивні речовини є найбільш і найменш поширеними серед респондентів?"
+Які психоактивні речовини є найбільш і найменш поширеними серед респондентів?
 ```vega-lite
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "title": "Рейтинг популярності психоактивних речовин серед респондентів",
 
-  "width": 700,
+  "width": 600,
 
   "data": {
     "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
