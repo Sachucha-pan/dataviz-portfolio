@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "title": "Популярність психоактивних речовин серед жінок",
+  "title": "Популярність серед жінок",
 
   "width": 250,
 
@@ -42,11 +42,61 @@
     }
   ],
 
-  "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 5,
-    "color": "#DC2626"
+"layer": [
+  {
+    "mark": {
+      "type": "bar",
+      "cornerRadiusEnd": 5,
+      "color": "#2563EB"
+    },
+    "encoding": {
+      "y": {
+        "field": "Drug",
+        "type": "nominal",
+        "sort": "-x",
+        "title": "Речовина"
+      },
+      "x": {
+        "aggregate": "mean",
+        "field": "User",
+        "type": "quantitative",
+        "title": "Частка користувачів",
+        "axis": {
+          "format": ".0%"
+        }
+      }
+    }
   },
+  {
+    "mark": {
+      "type": "text",
+      "align": "left",
+      "baseline": "middle",
+      "dx": 5,
+      "fontSize": 11,
+      "fontWeight": "bold",
+      "color": "#1E3A8A"
+    },
+    "encoding": {
+      "y": {
+        "field": "Drug",
+        "type": "nominal",
+        "sort": "-x"
+      },
+      "x": {
+        "aggregate": "mean",
+        "field": "User",
+        "type": "quantitative"
+      },
+      "text": {
+        "aggregate": "mean",
+        "field": "User",
+        "type": "quantitative",
+        "format": ".0%"
+      }
+    }
+  }
+]
 
   "encoding": {
     "y": {
