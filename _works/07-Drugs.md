@@ -11,15 +11,83 @@ title: Аналіз популярності психоактивних речо
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "title": "Дашборд: психоактивні речовини та психологічні характеристики",
+  "title": "Дашборд: Демографічні характеристики, особистісні риси та вживання психоактивних речовин",
 
   "vconcat": [
 
     {
-      "title": "Популярність психоактивних речовин",
+      "title": "Фільтр: оберіть вікову групу",
 
       "width": 800,
-      "height": 280,
+      "height": 120,
+
+      "data": {
+        "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
+      },
+
+      "params": [
+        {
+          "name": "ageSelect",
+          "select": {
+            "type": "point",
+            "fields": ["Age"]
+          }
+        }
+      ],
+
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopLeft": 4,
+        "cornerRadiusTopRight": 4
+      },
+
+      "encoding": {
+        "x": {
+          "field": "Age",
+          "type": "ordinal",
+          "sort": [
+            "18-24",
+            "25-34",
+            "35-44",
+            "45-54",
+            "55-64",
+            "65+"
+          ],
+          "title": "Вікова група"
+        },
+
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Кількість респондентів"
+        },
+
+        "color": {
+          "condition": {
+            "param": "ageSelect",
+            "value": "#2563EB"
+          },
+          "value": "#D1D5DB"
+        },
+
+        "tooltip": [
+          {
+            "field": "Age",
+            "title": "Вікова група"
+          },
+          {
+            "aggregate": "count",
+            "title": "Кількість респондентів"
+          }
+        ]
+      }
+    },
+
+    {
+      "title": "Розподіл респондентів за рівнем освіти",
+
+      "width": 800,
+      "height": 300,
 
       "data": {
         "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
@@ -27,64 +95,36 @@ title: Аналіз популярності психоактивних речо
 
       "transform": [
         {
-          "fold": [
-            "Alcohol","Amphet","Amyl","Benzos",
-            "Caff","Cannabis","Choc","Coke",
-            "Crack","Ecstasy","Heroin","Ketamine",
-            "Legalh","LSD","Meth","Mushrooms",
-            "Nicotine","VSA"
-          ],
-          "as": ["Drug", "Usage"]
-        },
-        {
-          "calculate": "datum.Usage == 'CL0' ? 0 : 1",
-          "as": "User"
+          "filter": {
+            "param": "ageSelect"
+          }
         }
       ],
 
       "mark": {
-        "type": "bar",
-        "cornerRadiusEnd": 4
+        "type": "arc",
+        "innerRadius": 70
       },
 
       "encoding": {
-        "y": {
-          "field": "Drug",
-          "type": "nominal",
-          "sort": "-x",
-          "title": "Речовина"
-        },
-
-        "x": {
-          "aggregate": "mean",
-          "field": "User",
-          "type": "quantitative",
-          "title": "Частка користувачів",
-          "axis": {
-            "format": ".0%"
-          }
+        "theta": {
+          "aggregate": "count"
         },
 
         "color": {
-          "aggregate": "mean",
-          "field": "User",
-          "type": "quantitative",
-          "scale": {
-            "scheme": "blues"
-          },
-          "legend": null
+          "field": "Education",
+          "type": "nominal",
+          "title": "Освіта"
         },
 
         "tooltip": [
           {
-            "field": "Drug",
-            "title": "Речовина"
+            "field": "Education",
+            "title": "Рівень освіти"
           },
           {
-            "aggregate": "mean",
-            "field": "User",
-            "format": ".1%",
-            "title": "Частка користувачів"
+            "aggregate": "count",
+            "title": "Кількість"
           }
         ]
       }
@@ -94,15 +134,26 @@ title: Аналіз популярності психоактивних речо
       "title": "Відкритість до нового досвіду та рівень вживання LSD",
 
       "width": 800,
-      "height": 300,
+      "height": 320,
 
       "data": {
         "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
       },
 
+      "transform": [
+        {
+          "filter": {
+            "param": "ageSelect"
+          }
+        }
+      ],
+
       "mark": {
         "type": "line",
-        "point": true,
+        "point": {
+          "filled": true,
+          "size": 100
+        },
         "strokeWidth": 3
       },
 
@@ -111,8 +162,13 @@ title: Аналіз популярності психоактивних речо
           "field": "LSD",
           "type": "ordinal",
           "sort": [
-            "CL0","CL1","CL2","CL3",
-            "CL4","CL5","CL6"
+            "CL0",
+            "CL1",
+            "CL2",
+            "CL3",
+            "CL4",
+            "CL5",
+            "CL6"
           ],
           "title": "Рівень вживання LSD"
         },
@@ -126,11 +182,12 @@ title: Аналіз популярності психоактивних речо
 
         "color": {
           "field": "Gender",
+          "type": "nominal",
+          "title": "Стать",
           "scale": {
             "domain": ["M", "F"],
             "range": ["#2563EB", "#DC2626"]
-          },
-          "title": "Стать"
+          }
         },
 
         "tooltip": [
@@ -150,105 +207,14 @@ title: Аналіз популярності психоактивних речо
           }
         ]
       }
-    },
-
-    {
-      "title": "Психологічні характеристики за віковими групами",
-
-      "width": 800,
-      "height": 350,
-
-      "data": {
-        "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
-      },
-
-      "params": [
-        {
-          "name": "metricSelect",
-          "select": {
-            "type": "point",
-            "fields": ["Metric"]
-          },
-          "bind": "legend"
-        }
-      ],
-
-      "transform": [
-        {
-          "fold": [
-            "Ascore",
-            "Cscore",
-            "Escore",
-            "Impulsive",
-            "Nscore",
-            "Oscore",
-            "SS"
-          ],
-          "as": ["Metric", "Value"]
-        }
-      ],
-
-      "mark": {
-        "type": "line",
-        "point": true,
-        "strokeWidth": 3
-      },
-
-      "encoding": {
-        "x": {
-          "field": "Age",
-          "type": "ordinal",
-          "sort": [
-            "18-24",
-            "25-34",
-            "35-44",
-            "45-54",
-            "55-64",
-            "65+"
-          ],
-          "title": "Вікова група"
-        },
-
-        "y": {
-          "aggregate": "mean",
-          "field": "Value",
-          "type": "quantitative",
-          "title": "Середнє значення"
-        },
-
-        "color": {
-          "field": "Metric",
-          "type": "nominal",
-          "title": "Показник"
-        },
-
-        "opacity": {
-          "condition": {
-            "param": "metricSelect",
-            "value": 1
-          },
-          "value": 0.15
-        },
-
-        "tooltip": [
-          {
-            "field": "Metric",
-            "title": "Показник"
-          },
-          {
-            "field": "Age",
-            "title": "Вікова група"
-          },
-          {
-            "aggregate": "mean",
-            "field": "Value",
-            "format": ".2f",
-            "title": "Середнє значення"
-          }
-        ]
-      }
     }
   ],
+
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
 
   "config": {
     "view": {
