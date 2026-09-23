@@ -11,188 +11,167 @@ title: Аналіз популярності психоактивних речо
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "title": "Дашборд аналізу психоактивних речовин та психологічних характеристик",
+  "title": "Дашборд: психоактивні речовини та психологічні характеристики",
 
   "vconcat": [
 
     {
-      "hconcat": [
+      "title": "Популярність психоактивних речовин",
 
+      "width": 800,
+      "height": 280,
+
+      "data": {
+        "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
+      },
+
+      "transform": [
         {
-          "title": "Популярність серед чоловіків",
-
-          "width": 300,
-          "height": 350,
-
-          "data": {
-            "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
-          },
-
-          "transform": [
-            {
-              "filter": "datum.Gender == 'M'"
-            },
-            {
-              "fold": [
-                "Alcohol",
-                "Amphet",
-                "Amyl",
-                "Benzos",
-                "Caff",
-                "Cannabis",
-                "Choc",
-                "Coke",
-                "Crack",
-                "Ecstasy",
-                "Heroin",
-                "Ketamine",
-                "Legalh",
-                "LSD",
-                "Meth",
-                "Mushrooms",
-                "Nicotine",
-                "VSA"
-              ],
-              "as": ["Drug", "Usage"]
-            },
-            {
-              "calculate": "datum.Usage == 'CL0' ? 0 : 1",
-              "as": "User"
-            }
+          "fold": [
+            "Alcohol","Amphet","Amyl","Benzos",
+            "Caff","Cannabis","Choc","Coke",
+            "Crack","Ecstasy","Heroin","Ketamine",
+            "Legalh","LSD","Meth","Mushrooms",
+            "Nicotine","VSA"
           ],
+          "as": ["Drug", "Usage"]
+        },
+        {
+          "calculate": "datum.Usage == 'CL0' ? 0 : 1",
+          "as": "User"
+        }
+      ],
 
-          "mark": {
-            "type": "bar",
-            "cornerRadiusEnd": 5,
-            "color": "#2563EB"
-          },
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4
+      },
 
-          "encoding": {
-            "y": {
-              "field": "Drug",
-              "type": "nominal",
-              "sort": "-x",
-              "title": "Речовина"
-            },
+      "encoding": {
+        "y": {
+          "field": "Drug",
+          "type": "nominal",
+          "sort": "-x",
+          "title": "Речовина"
+        },
 
-            "x": {
-              "aggregate": "mean",
-              "field": "User",
-              "type": "quantitative",
-              "title": "Частка користувачів",
-              "axis": {
-                "format": ".0%"
-              }
-            },
-
-            "tooltip": [
-              {
-                "field": "Drug",
-                "title": "Речовина"
-              },
-              {
-                "aggregate": "mean",
-                "field": "User",
-                "format": ".1%",
-                "title": "Частка користувачів"
-              }
-            ]
+        "x": {
+          "aggregate": "mean",
+          "field": "User",
+          "type": "quantitative",
+          "title": "Частка користувачів",
+          "axis": {
+            "format": ".0%"
           }
         },
 
-        {
-          "title": "Популярність серед жінок",
-
-          "width": 300,
-          "height": 350,
-
-          "data": {
-            "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
+        "color": {
+          "aggregate": "mean",
+          "field": "User",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "blues"
           },
+          "legend": null
+        },
 
-          "transform": [
-            {
-              "filter": "datum.Gender == 'F'"
-            },
-            {
-              "fold": [
-                "Alcohol",
-                "Amphet",
-                "Amyl",
-                "Benzos",
-                "Caff",
-                "Cannabis",
-                "Choc",
-                "Coke",
-                "Crack",
-                "Ecstasy",
-                "Heroin",
-                "Ketamine",
-                "Legalh",
-                "LSD",
-                "Meth",
-                "Mushrooms",
-                "Nicotine",
-                "VSA"
-              ],
-              "as": ["Drug", "Usage"]
-            },
-            {
-              "calculate": "datum.Usage == 'CL0' ? 0 : 1",
-              "as": "User"
-            }
-          ],
-
-          "mark": {
-            "type": "bar",
-            "cornerRadiusEnd": 5,
-            "color": "#DC2626"
+        "tooltip": [
+          {
+            "field": "Drug",
+            "title": "Речовина"
           },
-
-          "encoding": {
-            "y": {
-              "field": "Drug",
-              "type": "nominal",
-              "sort": "-x",
-              "title": "Речовина"
-            },
-
-            "x": {
-              "aggregate": "mean",
-              "field": "User",
-              "type": "quantitative",
-              "title": "Частка користувачів",
-              "axis": {
-                "format": ".0%"
-              }
-            },
-
-            "tooltip": [
-              {
-                "field": "Drug",
-                "title": "Речовина"
-              },
-              {
-                "aggregate": "mean",
-                "field": "User",
-                "format": ".1%",
-                "title": "Частка користувачів"
-              }
-            ]
+          {
+            "aggregate": "mean",
+            "field": "User",
+            "format": ".1%",
+            "title": "Частка користувачів"
           }
-        }
-      ]
+        ]
+      }
+    },
+
+    {
+      "title": "Відкритість до нового досвіду та рівень вживання LSD",
+
+      "width": 800,
+      "height": 300,
+
+      "data": {
+        "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
+      },
+
+      "mark": {
+        "type": "line",
+        "point": true,
+        "strokeWidth": 3
+      },
+
+      "encoding": {
+        "x": {
+          "field": "LSD",
+          "type": "ordinal",
+          "sort": [
+            "CL0","CL1","CL2","CL3",
+            "CL4","CL5","CL6"
+          ],
+          "title": "Рівень вживання LSD"
+        },
+
+        "y": {
+          "aggregate": "mean",
+          "field": "Oscore",
+          "type": "quantitative",
+          "title": "Середній Oscore"
+        },
+
+        "color": {
+          "field": "Gender",
+          "scale": {
+            "domain": ["M", "F"],
+            "range": ["#2563EB", "#DC2626"]
+          },
+          "title": "Стать"
+        },
+
+        "tooltip": [
+          {
+            "field": "Gender",
+            "title": "Стать"
+          },
+          {
+            "field": "LSD",
+            "title": "Рівень LSD"
+          },
+          {
+            "aggregate": "mean",
+            "field": "Oscore",
+            "format": ".2f",
+            "title": "Середній Oscore"
+          }
+        ]
+      }
     },
 
     {
       "title": "Психологічні характеристики за віковими групами",
 
-      "width": 700,
+      "width": 800,
       "height": 350,
 
       "data": {
         "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
       },
+
+      "params": [
+        {
+          "name": "metricSelect",
+          "select": {
+            "type": "point",
+            "fields": ["Metric"]
+          },
+          "bind": "legend"
+        }
+      ],
 
       "transform": [
         {
@@ -243,14 +222,22 @@ title: Аналіз популярності психоактивних речо
           "title": "Показник"
         },
 
-        "tooltip": [
-          {
-            "field": "Age",
-            "title": "Вік"
+        "opacity": {
+          "condition": {
+            "param": "metricSelect",
+            "value": 1
           },
+          "value": 0.15
+        },
+
+        "tooltip": [
           {
             "field": "Metric",
             "title": "Показник"
+          },
+          {
+            "field": "Age",
+            "title": "Вікова група"
           },
           {
             "aggregate": "mean",
@@ -269,7 +256,6 @@ title: Аналіз популярності психоактивних речо
     }
   }
 }
-
 ```
 Дашборд поєднує аналіз популярності психоактивних речовин та психологічних характеристик респондентів. Перші дві візуалізації демонструють структуру споживання речовин серед чоловіків і жінок та дозволяють виявити гендерні відмінності. Третя інтерактивна візуалізація дає можливість дослідити зв'язок між віком респондентів і ключовими психологічними характеристиками.
 
