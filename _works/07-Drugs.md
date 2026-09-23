@@ -11,7 +11,7 @@ title: Аналіз популярності психоактивних речо
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "title": "Дашборд аналізу споживання психоактивних речовин",
+  "title": "Дашборд аналізу психоактивних речовин та психологічних характеристик",
 
   "vconcat": [
 
@@ -21,8 +21,8 @@ title: Аналіз популярності психоактивних речо
         {
           "title": "Популярність серед чоловіків",
 
-          "width": 350,
-          "height": 400,
+          "width": 300,
+          "height": 350,
 
           "data": {
             "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
@@ -71,27 +71,30 @@ title: Аналіз популярності психоактивних речо
             "y": {
               "field": "Drug",
               "type": "nominal",
-              "sort": "-x"
+              "sort": "-x",
+              "title": "Речовина"
             },
 
             "x": {
               "aggregate": "mean",
               "field": "User",
               "type": "quantitative",
+              "title": "Частка користувачів",
               "axis": {
                 "format": ".0%"
-              },
-              "title": "Частка користувачів"
+              }
             },
 
             "tooltip": [
               {
-                "field": "Drug"
+                "field": "Drug",
+                "title": "Речовина"
               },
               {
                 "aggregate": "mean",
                 "field": "User",
-                "format": ".1%"
+                "format": ".1%",
+                "title": "Частка користувачів"
               }
             ]
           }
@@ -100,8 +103,8 @@ title: Аналіз популярності психоактивних речо
         {
           "title": "Популярність серед жінок",
 
-          "width": 350,
-          "height": 400,
+          "width": 300,
+          "height": 350,
 
           "data": {
             "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
@@ -150,27 +153,30 @@ title: Аналіз популярності психоактивних речо
             "y": {
               "field": "Drug",
               "type": "nominal",
-              "sort": "-x"
+              "sort": "-x",
+              "title": "Речовина"
             },
 
             "x": {
               "aggregate": "mean",
               "field": "User",
               "type": "quantitative",
+              "title": "Частка користувачів",
               "axis": {
                 "format": ".0%"
-              },
-              "title": "Частка користувачів"
+              }
             },
 
             "tooltip": [
               {
-                "field": "Drug"
+                "field": "Drug",
+                "title": "Речовина"
               },
               {
                 "aggregate": "mean",
                 "field": "User",
-                "format": ".1%"
+                "format": ".1%",
+                "title": "Частка користувачів"
               }
             ]
           }
@@ -181,32 +187,12 @@ title: Аналіз популярності психоактивних речо
     {
       "title": "Психологічні характеристики за віковими групами",
 
-      "width": 800,
+      "width": 700,
       "height": 350,
 
       "data": {
         "url": "https://raw.githubusercontent.com/Sachucha-pan/dataviz-portfolio/main/specs/Drug_Consumption.csv"
       },
-
-      "params": [
-        {
-          "name": "metric_select",
-          "value": "Oscore",
-          "bind": {
-            "input": "select",
-            "name": "Оберіть показник: ",
-            "options": [
-              "Ascore",
-              "Cscore",
-              "Escore",
-              "Impulsive",
-              "Nscore",
-              "Oscore",
-              "SS"
-            ]
-          }
-        }
-      ],
 
       "transform": [
         {
@@ -219,20 +205,14 @@ title: Аналіз популярності психоактивних речо
             "Oscore",
             "SS"
           ],
-          "as": [
-            "Metric",
-            "Value"
-          ]
-        },
-        {
-          "filter": "datum.Metric == metric_select"
+          "as": ["Metric", "Value"]
         }
       ],
 
       "mark": {
-        "type": "bar",
-        "cornerRadiusTopLeft": 4,
-        "cornerRadiusTopRight": 4
+        "type": "line",
+        "point": true,
+        "strokeWidth": 3
       },
 
       "encoding": {
@@ -258,8 +238,9 @@ title: Аналіз популярності психоактивних речо
         },
 
         "color": {
-          "field": "Age",
-          "legend": null
+          "field": "Metric",
+          "type": "nominal",
+          "title": "Показник"
         },
 
         "tooltip": [
@@ -275,13 +256,20 @@ title: Аналіз популярності психоактивних речо
             "aggregate": "mean",
             "field": "Value",
             "format": ".2f",
-            "title": "Середнє"
+            "title": "Середнє значення"
           }
         ]
       }
     }
-  ]
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
 }
+
 ```
 Дашборд поєднує аналіз популярності психоактивних речовин та психологічних характеристик респондентів. Перші дві візуалізації демонструють структуру споживання речовин серед чоловіків і жінок та дозволяють виявити гендерні відмінності. Третя інтерактивна візуалізація дає можливість дослідити зв'язок між віком респондентів і ключовими психологічними характеристиками.
 
